@@ -15,17 +15,11 @@
   "_aerobatic": {
     "router": [
       {
-        "module": "webpage",
-        "options": {
-          "pushState": true,
-          "canonicalRedirects": true
-        }
-      },
-      {
         "module": "express-request-proxy",
-        "path": "/api/status/*",
+        "path": "/api/status/uptime",
         "options": {
-          "url": "https://http://javadoc-emblem.rhcloud.com/status/"
+          "cacheMaxAge": 0,
+          "url": "http://javadoc-emblem.rhcloud.com/status/uptime"
         }
       }
     ]
