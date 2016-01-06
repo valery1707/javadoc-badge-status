@@ -1,0 +1,33 @@
+{
+  "name": "javadoc-badge-status",
+  "version": "1.0.0",
+  "description": "Status page for Javadoc badge project with AngularJS on the Aerobatic platform",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/valery1707/javadoc-badge-status.git"
+  },
+  "author": "Valeriy Vyrva",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/valery1707/javadoc-badge-status/issues"
+  },
+  "homepage": "https://github.com/valery1707/javadoc-badge-status",
+  "_aerobatic": {
+    "router": [
+      {
+        "module": "webpage",
+        "options": {
+          "pushState": true,
+          "canonicalRedirects": true
+        }
+      },
+      {
+        "module": "express-request-proxy",
+        "path": "/api/status/*",
+        "options": {
+          "url": "https://http://javadoc-emblem.rhcloud.com/status/"
+        }
+      }
+    ]
+  }
+}
