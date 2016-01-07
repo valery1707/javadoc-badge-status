@@ -14,14 +14,6 @@
   "homepage": "https://github.com/valery1707/javadoc-badge-status",
   "_aerobatic": {
     "router": [
-      {
-        "module": "express-request-proxy",
-        "path": "/api/status/uptime",
-        "options": {
-          "cacheMaxAge": 0,
-          "url": "http://javadoc-emblem.rhcloud.com/status/uptime"
-        }
-      }
     ]
   }
 }

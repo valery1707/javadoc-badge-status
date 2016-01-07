@@ -1,5 +1,7 @@
 'use strict';
 
+var apiBaseUrl = '//javadoc-emblem.rhcloud.com/api/v1';
+
 // Declare app level module which depends on views, and components
 angular.module('javadocBadgeApp', [
 	'ngRoute',
@@ -13,7 +15,7 @@ config(['$routeProvider', function ($routeProvider) {
 
 // #status
 factory('Status', ['$resource', function ($resource) {
-	return $resource('api/status', {}, {
+	return $resource(apiBaseUrl + '/status', {}, {
 		query: {method: 'GET', params: {}, isArray: false}
 	});
 }]).
@@ -23,7 +25,7 @@ controller('StatusCtrl', ['$scope', 'Status', function ($scope, Status) {
 
 // #status/uptime
 factory('Uptime', ['$resource', function ($resource) {
-	return $resource('api/status/uptime', {}, {
+	return $resource(apiBaseUrl + '/status/uptime', {}, {
 		query: {
 			method: 'GET',
 			params: {},
