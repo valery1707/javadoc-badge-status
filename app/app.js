@@ -5,9 +5,7 @@ var apiBaseUrl = '//javadoc-emblem.rhcloud.com/api/v1';
 // Declare app level module which depends on views, and components
 angular.module('javadocBadgeApp', [
 	'ngRoute',
-	'ngResource',
-	'javadocBadgeApp.view1',
-	'javadocBadgeApp.view2'
+	'ngResource'
 ]).
 config(['$routeProvider', function ($routeProvider) {
 	$routeProvider.otherwise({redirectTo: '/view1'});
