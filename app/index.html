@@ -54,7 +54,19 @@
   <div class="row" ng-controller="MemoryCtrl">
       <div class="col-lg-6 col-sm-12">
           <div class="panel panel-default">
-              <div class="panel-heading">Memory</div>
+              <div class="panel-heading">
+                  Memory
+                  <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+<!--
+                      <button type="button" class="btn btn-default" aria-label="Refresh">
+                          <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                      </button>
+-->
+                      <button type="button" class="btn btn-default" aria-label="Update" ng-click="refresh()">
+                          <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                      </button>
+                  </div>
+              </div>
               <div class="panel-body">
                   <canvas class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-options="options"></canvas>
               </div>

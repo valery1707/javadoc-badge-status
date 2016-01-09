@@ -54,7 +54,7 @@ factory('Memory', ['$resource', function ($resource) {
 	});
 }]).
 controller('MemoryCtrl', ['$scope', 'Memory', function ($scope, Memory) {
-	$scope.memory = Memory.query(function() {
+	var toChart = function(data) {
 		$scope.labels = [
 			"Max: " + formatBytes_1024($scope.memory.max),
 			"Total: " + formatBytes_1024($scope.memory.total),
@@ -65,9 +65,17 @@ controller('MemoryCtrl', ['$scope', 'Memory', function ($scope, Memory) {
 			$scope.memory.total - $scope.memory.used,
 			$scope.memory.used
 		];
-		$scope.options = {
-			tooltipTemplate: "<%= label %>"
-		};
+	};
+	$scope.options = {
+		tooltipTemplate: "<%= label %>"
+	};
+	$scope.refresh = function() {
+		$scope.memory = Memory.query(function(data) {
+			toChart(data);
+		});
+	};
+	$scope.memory = Memory.query(function() {
+		toChart($scope.memory);
 	});
 }])
 ;
