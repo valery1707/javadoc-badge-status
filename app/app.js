@@ -39,5 +39,20 @@ factory('Uptime', ['$resource', function ($resource) {
 }]).
 controller('UptimeCtrl', ['$scope', 'Uptime', function ($scope, Uptime) {
 	$scope.uptime = Uptime.query();
+}]).
+
+// #status/memory
+factory('Memory', ['$resource', function ($resource) {
+	return $resource(apiBaseUrl + '/status/memory', {}, {
+		query: {
+			method: 'GET',
+			params: {},
+			isArray: false,
+			cache: false
+		}
+	});
+}]).
+controller('MemoryCtrl', ['$scope', 'Memory', function ($scope, Memory) {
+	$scope.memory = Memory.query();
 }])
 ;
