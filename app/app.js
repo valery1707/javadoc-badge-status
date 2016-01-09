@@ -53,8 +53,8 @@ factory('Memory', ['$resource', function ($resource) {
 		}
 	});
 }]).
-controller('MemoryCtrl', ['$scope', 'Memory', function ($scope, Memory) {
-	var toChart = function(data) {
+controller('MemoryCtrl', ['$scope', '$interval', 'Memory', function ($scope, $interval, Memory) {
+	var toChart = function (data) {
 		$scope.labels = [
 			"Max: " + formatBytes_1024($scope.memory.max),
 			"Total: " + formatBytes_1024($scope.memory.total),
@@ -69,12 +69,24 @@ controller('MemoryCtrl', ['$scope', 'Memory', function ($scope, Memory) {
 	$scope.options = {
 		tooltipTemplate: "<%= label %>"
 	};
-	$scope.refresh = function() {
-		$scope.memory = Memory.query(function(data) {
+	$scope.update = function () {
+		$scope.memory = Memory.query(function (data) {
 			toChart(data);
 		});
 	};
-	$scope.memory = Memory.query(function() {
+	$scope.refreshEnabled = false;
+	$scope.refreshFn = null;
+	$scope.refresh = function () {
+		var wasEnabled = $scope.refreshEnabled;
+		$scope.refreshEnabled = !$scope.refreshEnabled;
+		if (wasEnabled) {
+			$interval.cancel($scope.refreshFn);
+		} else {
+			$scope.refreshFn = $interval($scope.update, 5000);
+			$scope.update();
+		}
+	};
+	$scope.memory = Memory.query(function () {
 		toChart($scope.memory);
 	});
 }])
