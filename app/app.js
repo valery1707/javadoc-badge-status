@@ -6,6 +6,7 @@ var apiBaseUrl = '//javadoc-emblem.rhcloud.com/api/v1';
 angular.module('javadocBadgeApp', [
 	'ngRoute',
 	'ngResource'
+	, 'chart.js'
 ]).
 config(['$routeProvider', function ($routeProvider) {
 	$routeProvider.otherwise({redirectTo: '/view1'});
@@ -53,6 +54,20 @@ factory('Memory', ['$resource', function ($resource) {
 	});
 }]).
 controller('MemoryCtrl', ['$scope', 'Memory', function ($scope, Memory) {
-	$scope.memory = Memory.query();
+	$scope.memory = Memory.query(function() {
+		$scope.labels = [
+			"Max: " + formatBytes_1024($scope.memory.max),
+			"Total: " + formatBytes_1024($scope.memory.total),
+			"Used: " + formatBytes_1024($scope.memory.used)
+		];
+		$scope.data = [
+			$scope.memory.max - $scope.memory.total,
+			$scope.memory.total - $scope.memory.used,
+			$scope.memory.used
+		];
+		$scope.options = {
+			tooltipTemplate: "<%= label %>"
+		};
+	});
 }])
 ;

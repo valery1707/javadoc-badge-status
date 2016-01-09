@@ -23,10 +23,16 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
+    <!--Angular Chart-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    <script src="//cdn.jsdelivr.net/angular.chartjs/0.8.8/angular-chart.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/angular.chartjs/0.8.8/angular-chart.css">
+
     <base href="/"/>
     <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 
     <link rel="stylesheet" href="app.css">
+    <script src="utils.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
@@ -38,8 +44,15 @@
       Uptime: {{uptime.value}}
   </div>
 
-  <div ng-controller="MemoryCtrl">
-      Memory: {{memory}}
+  <div class="row" ng-controller="MemoryCtrl">
+      <div class="col-lg-6 col-sm-12">
+          <div class="panel panel-default">
+              <div class="panel-heading">Memory</div>
+              <div class="panel-body">
+                  <canvas class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-options="options"></canvas>
+              </div>
+          </div>
+      </div>
   </div>
 </body>
 </html>
