@@ -75,19 +75,33 @@ controller('MemoryCtrl', ['$scope', '$interval', 'Memory', function ($scope, $in
 		});
 	};
 	$scope.refreshEnabled = false;
-	$scope.refreshFn = null;
-	$scope.refresh = function () {
-		var wasEnabled = $scope.refreshEnabled;
-		$scope.refreshEnabled = !$scope.refreshEnabled;
-		if (wasEnabled) {
-			$interval.cancel($scope.refreshFn);
-		} else {
-			$scope.refreshFn = $interval($scope.update, 5000);
-			$scope.update();
+	var refreshFn;
+	$scope.refreshStart = function () {
+		if (angular.isDefined(refreshFn)) {
+			return;
+		}
+		$scope.refreshEnabled = true;
+		refreshFn = $interval($scope.update, 5000);
+		$scope.update();
+	};
+	$scope.refreshStop = function () {
+		$scope.refreshEnabled = false;
+		if (angular.isDefined(refreshFn)) {
+			$interval.cancel(refreshFn);
+			refreshFn = undefined;
 		}
 	};
-	$scope.memory = Memory.query(function () {
-		toChart($scope.memory);
+	$scope.refreshTrigger = function () {
+		if ($scope.refreshEnabled) {
+			$scope.refreshStop();
+		} else {
+			$scope.refreshStart();
+		}
+	};
+	$scope.$on('$destroy', function () {
+		// Make sure that the interval is destroyed too
+		$scope.refreshStop();
 	});
+	$scope.update();
 }])
 ;
