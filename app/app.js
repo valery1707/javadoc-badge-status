@@ -6,7 +6,7 @@ var apiBaseUrl = '//javadoc-emblem.rhcloud.com/api/v1';
 angular.module('javadocBadgeApp', [
 	'ngRoute',
 	'ngResource'
-	, 'chart.js'
+	, 'angularChart'
 ]).
 config(['$routeProvider', function ($routeProvider) {
 	$routeProvider.otherwise({redirectTo: '/view1'});
@@ -55,22 +55,40 @@ factory('Memory', ['$resource', function ($resource) {
 }]).
 controller('MemoryCtrl', ['$scope', '$interval', 'Memory', function ($scope, $interval, Memory) {
 	var toChart = function (data) {
-		$scope.labels.push(new Date().toISOString());
-		$scope.data[0].push($scope.memory.max);
-		$scope.data[1].push($scope.memory.total);
-		$scope.data[2].push($scope.memory.used);
-		if ($scope.type == 'Bar' && $scope.labels.length > 3) {
-			$scope.type = 'Line';
-		}
+		$scope.options_chart.data.push({
+			max: $scope.memory.max,
+			total: $scope.memory.total,
+			used: $scope.memory.used,
+			date: new Date()
+		});
 	};
-	$scope.labels = [];
-	$scope.series = ["Max", "Total", "Used"];
-	$scope.data = [[], [], []];
-	$scope.type = 'Bar';
-	$scope.options = {
-		animation: false,
-		showScale: false,
-		multiTooltipTemplate: "<%= formatBytes_1024(value) %>"
+	$scope.options_chart = {
+		data: [],
+		dimensions: {
+			max: {
+				type: 'spline',
+				dataType: 'numeric',
+				displayFormat: formatBytes_1024
+			},
+			total: {
+				type: 'area-spline',
+				dataType: 'numeric',
+				displayFormat: formatBytes_1024
+			},
+			used: {
+				type: 'spline',
+				dataType: 'numeric',
+				displayFormat: formatBytes_1024
+			},
+			date: {
+				dataType: 'datetime',
+				axis: 'x',
+				displayFormat: function (x) {
+					var s = x.toISOString();
+					return s.substring(0, s.indexOf('.')).replace('T', ' ');
+				}
+			}
+		}
 	};
 	$scope.update = function () {
 		$scope.memory = Memory.query(function (data) {

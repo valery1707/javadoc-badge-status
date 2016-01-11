@@ -23,10 +23,11 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-    <!--Angular Chart-->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-    <script src="//cdn.jsdelivr.net/angular.chartjs/0.8.8/angular-chart.min.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/angular.chartjs/0.8.8/angular-chart.css">
+    <!--angular-chart-->
+    <script src="//cdn.jsdelivr.net/d3js/3.5.12/d3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+    <script src="angular-chart.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.css" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -66,7 +67,7 @@
                   </div>
               </div>
               <div class="panel-body">
-                  <canvas class="chart chart-base" chart-type="type" chart-data="data" chart-labels="labels" chart-options="options"></canvas>
+                  <angular-chart options="options_chart"></angular-chart>
               </div>
           </div>
       </div>
