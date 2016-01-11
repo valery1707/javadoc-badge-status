@@ -55,19 +55,22 @@ factory('Memory', ['$resource', function ($resource) {
 }]).
 controller('MemoryCtrl', ['$scope', '$interval', 'Memory', function ($scope, $interval, Memory) {
 	var toChart = function (data) {
-		$scope.labels = [
-			"Max: " + formatBytes_1024($scope.memory.max),
-			"Total: " + formatBytes_1024($scope.memory.total),
-			"Used: " + formatBytes_1024($scope.memory.used)
-		];
-		$scope.data = [
-			$scope.memory.max - $scope.memory.total,
-			$scope.memory.total - $scope.memory.used,
-			$scope.memory.used
-		];
+		$scope.labels.push(new Date().toISOString());
+		$scope.data[0].push($scope.memory.max);
+		$scope.data[1].push($scope.memory.total);
+		$scope.data[2].push($scope.memory.used);
+		if ($scope.type == 'Bar' && $scope.labels.length > 3) {
+			$scope.type = 'Line';
+		}
 	};
+	$scope.labels = [];
+	$scope.series = ["Max", "Total", "Used"];
+	$scope.data = [[], [], []];
+	$scope.type = 'Bar';
 	$scope.options = {
-		tooltipTemplate: "<%= label %>"
+		animation: false,
+		showScale: false,
+		multiTooltipTemplate: "<%= formatBytes_1024(value) %>"
 	};
 	$scope.update = function () {
 		$scope.memory = Memory.query(function (data) {
