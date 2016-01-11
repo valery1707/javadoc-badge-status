@@ -84,7 +84,7 @@ controller('MemoryCtrl', ['$scope', '$interval', 'Memory', function ($scope, $in
 			return;
 		}
 		$scope.refreshEnabled = true;
-		refreshFn = $interval($scope.update, 5000);
+		refreshFn = $interval($scope.update, 60 * 1000);
 		$scope.update();
 	};
 	$scope.refreshStop = function () {
