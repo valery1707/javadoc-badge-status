@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-    <!--angular-chart-->
+    <!--angular-chart: https://github.com/GraFiddle/angular-chart-->
     <script src="//cdn.jsdelivr.net/d3js/3.5.12/d3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
     <script src="angular-chart.min.js"></script>
@@ -74,6 +74,27 @@
               </div>
               <div class="panel-body">
                   {{uptime.value}}
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="row" ng-controller="CacheCtrl">
+      <div class="col-lg-5 col-sm-10">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  Cache
+                  <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                      <button type="button" class="btn btn-default" aria-label="Refresh" ng-click="refreshTrigger()" title="Continuously refresh" ng-class="{'active': refreshEnabled}">
+                          <span class="glyphicon glyphicon-refresh" aria-hidden="true" ng-class="{'gly-spin': refreshEnabled}"></span>
+                      </button>
+                      <button type="button" class="btn btn-default" aria-label="Update" ng-click="update()" title="One time refresh">
+                          <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                      </button>
+                  </div>
+              </div>
+              <div class="panel-body">
+                  <angular-chart options="options_chart"></angular-chart>
               </div>
           </div>
       </div>
