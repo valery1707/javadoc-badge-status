@@ -22,6 +22,25 @@ controller('StatusCtrl', ['$scope', 'Status', function ($scope, Status) {
 	$scope.status = Status.query();
 }]).
 
+// #status/version
+factory('Version', ['$resource', function ($resource) {
+	return $resource(apiBaseUrl + '/status/version', {}, {
+		query: {
+			method: 'GET',
+			params: {},
+			isArray: false,
+			cache: false,
+			responseType: 'text',
+			transformResponse: function (data, headersGetter) {
+				return {value: data};
+			}
+		}
+	});
+}]).
+controller('VersionCtrl', ['$scope', 'Version', function ($scope, Version) {
+	$scope.version = Version.query();
+}]).
+
 // #status/uptime
 factory('Uptime', ['$resource', function ($resource) {
 	return $resource(apiBaseUrl + '/status/uptime', {}, {

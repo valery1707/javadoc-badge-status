@@ -48,6 +48,19 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
+  <div class="row" ng-controller="VersionCtrl">
+      <div class="col-lg-5 col-sm-10">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  Version
+              </div>
+              <div class="panel-body">
+                  {{version.value}}
+              </div>
+          </div>
+      </div>
+  </div>
+
   <div class="row" ng-controller="UptimeCtrl">
       <div class="col-lg-5 col-sm-10">
           <div class="panel panel-default">
