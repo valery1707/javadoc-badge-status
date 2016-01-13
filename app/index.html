@@ -48,8 +48,22 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-controller="UptimeCtrl">
-      Uptime: {{uptime.value}}
+  <div class="row" ng-controller="UptimeCtrl">
+      <div class="col-lg-5 col-sm-10">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  Uptime
+                  <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                      <button type="button" class="btn btn-default" aria-label="Update" ng-click="update()" title="One time refresh">
+                          <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                      </button>
+                  </div>
+              </div>
+              <div class="panel-body">
+                  {{uptime.value}}
+              </div>
+          </div>
+      </div>
   </div>
 
   <div class="row" ng-controller="MemoryCtrl">

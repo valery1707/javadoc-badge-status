@@ -39,7 +39,10 @@ factory('Uptime', ['$resource', function ($resource) {
 	});
 }]).
 controller('UptimeCtrl', ['$scope', 'Uptime', function ($scope, Uptime) {
-	$scope.uptime = Uptime.query();
+	$scope.update = function () {
+		$scope.uptime = Uptime.query();
+	};
+	$scope.update();
 }]).
 
 // #status/memory
