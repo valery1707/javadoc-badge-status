@@ -82,6 +82,7 @@ controller('CacheCtrl', ['$scope', '$interval', 'Cache', function ($scope, $inte
 			requestCount: data.requestCount,
 			hitCount: data.hitCount,
 			missCount: data.missCount,
+			hitPercent: (parseFloat(data.hitRate) * 100).toFixed(2),
 			date: new Date()
 		});
 	};
@@ -108,6 +109,12 @@ controller('CacheCtrl', ['$scope', '$interval', 'Cache', function ($scope, $inte
 				type: 'spline',
 				dataType: 'numeric',
 				name: 'Miss count'
+			},
+			hitPercent: {
+				type: 'spline',
+				dataType: 'numeric',
+				axis: 'y2',
+				name: 'Hit percentage'
 			},
 			date: {
 				dataType: 'datetime',
